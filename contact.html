@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Grobla Junior School Entebbe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-green: #2e7d32;
+      --dark-green: #1b5e20;
+      --text-dark: #1a3c34;
+      --light-gray: #f8fafc;
+      --whatsapp-green: #25D366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-gray);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 44px;
+    }
+
+    .navbar {
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: var(--primary-green);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.9rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+
+    h1.section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 2.5rem 0 1rem;
+      color: var(--text-dark);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-info,
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    }
+
+    .contact-info h2,
+    .contact-form h2 {
+      color: var(--primary-green);
+      margin-bottom: 1.4rem;
+      font-size: 1.55rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.6rem;
+      font-size: 1.05rem;
+    }
+
+    .info-item i {
+      color: var(--primary-green);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      margin-top: 3px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.95rem 1.2rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      width: 100%;
+      transition: border-color 0.25s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      background: var(--primary-green);
+      color: white;
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      align-self: flex-start;
+    }
+
+    button[type="submit"]:hover {
+      background: var(--dark-green);
+      transform: translateY(-2px);
+    }
+
+    .map-container {
+      margin-top: 1.8rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+    }
+
+    footer {
+      background: var(--text-dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      font-size: 0.95rem;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 25px;
+      right: 25px;
+      background: var(--whatsapp-green);
+      color: #FFF;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 38px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.25);
+      z-index: 999;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* ── Mobile Menu Slide + Responsive ── */
+    @media (max-width: 992px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      iframe {
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 14px;
+        right: 15px;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: white;
+        box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+        padding: 5rem 2rem 2rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 999;
+      }
+
+      .navbar.active {
+        right: 0;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        gap: 1.6rem;
+      }
+
+      .navbar a {
+        font-size: 1.15rem;
+        padding: 0.8rem 0;
+        display: block;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
+      h1.section-title {
+        font-size: 2.1rem;
+        margin: 2rem 0 0.8rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-info,
+      .contact-form {
+        padding: 1.6rem;
+      }
+
+      .info-item {
+        font-size: 1rem;
+      }
+
+      .info-item i {
+        font-size: 1.4rem;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 1.1rem;
+      }
+
+      iframe {
+        height: 260px;
+      }
+
+      .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        font-size: 34px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      h1.section-title {
+        font-size: 1.9rem;
+      }
+
+      .logo {
+        font-size: 1.35rem;
+      }
+
+      .logo img {
+        height: 40px;
+      }
+
+      .menu-toggle {
+        font-size: 1.8rem;
+      }
+
+      iframe {
+        height: 220px;
+      }
+
+      .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="School Logo" width="48"> GLOBAL JUNIOR 
+      </div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+           <li><a href="Gallery.html">Gallery</a></li>
+          <li><a href="news.html">News</a></li>
+          
+        </ul>
+      </nav>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <div class="container">
+        <h1 class="section-title">Get in Touch</h1>
+        <p class="subtitle">We’re here to help! Reach out with any questions about admissions, programs, or visiting us.</p>
+
+        <div class="contact-container">
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h2>Our Contact Details</h2>
+
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <strong>Address</strong>
+                Plot 12, Airport Road<br>
+                Entebbe, Wakiso District<br>
+                Uganda
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fas fa-phone-volume"></i>
+              <div>
+                <strong>Phone</strong>
+                +256 700 000 000<br>
+                +256 700 000 000
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong>
+                info@groblajuniorschool.com<br>
+                admissions@groblajuniorschool.com
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Office Hours</strong>
+                Mon–Fri: 7:30 AM – 5:00 PM<br>
+                Saturday: 8:00 AM – 12:00 PM
+              </div>
+            </div>
+
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.757!2d32.463!3d0.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMDDCsDAzJzAwLjAiTiAzMsKwMjcnNDcuOCJF!5e0!3m2!1sen!2sug!4v1690000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form">
+            <h2>Send us a Message</h2>
+            <form action="#" method="post">
+              <input type="text" name="name" placeholder="Your Full Name" required>
+              <input type="email" name="email" placeholder="Your Email Address" required>
+              <input type="tel" name="phone" placeholder="Phone Number (optional)">
+              <input type="text" name="subject" placeholder="Subject" required>
+              <textarea name="message" rows="6" placeholder="Your Message..." required></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <script>document.write(new Date().getFullYear());</script> Grobla Junior School Entebbe. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/256772123456?text=Hello%20Grobla%20Junior%20School%20team%2C%20I%20would%20like%20to%20know%20more%20about..." 
+     class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.navbar');
+
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', nav.classList.contains('active'));
+      });
+
+      document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+          nav.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

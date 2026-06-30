@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="description" content="Global Junior School Entebbe Gallery — Explore photos of school life, academics, sports, events, and more.">
+  <meta name="keywords" content="Global Junior School gallery, school photos, Entebbe school events, academics, sports day">
+  <meta name="author" content="Global Junior School Entebbe">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Gallery — Global Junior School Entebbe">
+  <meta property="og:description" content="Explore moments that capture the spirit and joy of our school community.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?w=1200&q=80">
+
+  <title>Gallery — Global Junior School Entebbe</title>
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Gallery Page Specific Styles */
+    .gallery-page-intro {
+      background: linear-gradient(135deg, var(--color-brand-dark), var(--color-primary-dark));
+      color: white;
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-page-intro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .gallery-page-intro h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .gallery-page-intro p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .gallery-page-intro .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      opacity: 0.7;
+      position: relative;
+    }
+
+    .gallery-page-intro .breadcrumb a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-page-intro .breadcrumb a:hover {
+      opacity: 0.8;
+    }
+
+    /* Full page gallery - more spacious */
+    .gallery-full-page .gallery-masonry {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-full-page .gallery-item {
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-full-page .gallery-item.tall {
+      aspect-ratio: 4 / 5;
+    }
+
+    /* No "View More" on this page */
+    .gallery-full-page .gallery-footer {
+      display: none;
+    }
+
+    /* Stats bar at bottom of gallery */
+    .gallery-stats {
+      background: var(--color-gray-50);
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid var(--color-gray-200);
+    }
+
+    .gallery-stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-stat {
+      text-align: center;
+    }
+
+    .gallery-stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .gallery-stat-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Back to home link */
+    .back-to-home {
+      text-align: center;
+      padding: 40px 0 80px;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-page-intro {
+        padding: 60px 20px 40px;
+      }
+
+      .gallery-full-page .gallery-masonry {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 14px;
+      }
+
+      .gallery-stats-grid {
+        gap: 30px;
+      }
+
+      .gallery-stat-number {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- ========== BACK TO TOP ========== -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- ========== WHATSAPP FLOATING BUTTON ========== -->
+  <a href="https://wa.me/256705612677?text=Hello%20Global%20Junior%20School%2C%20I%20saw%20your%20gallery%20and%20would%20like%20to%20enquire." 
+     class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ========== HEADER / NAVBAR ========== -->
+  <header class="header" id="header">
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <span><i class="fas fa-phone-alt"></i> +256705612677</span>
+            <span><i class="fas fa-envelope"></i>globaljuniorschool.com</span>
+            <span><i class="fas fa-clock"></i> Mon – Fri: 7:00 AM – 5:00 PM</span>
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-inner">
+          <a href="index.html" class="logo" aria-label="Global Junior School Home">
+            <img src="assets/logo.png" alt="School Logo" width="48" height="48">
+            <div class="logo-text">
+              <span class="logo-name">GLOBAL JUNIOR</span>
+              <span class="logo-sub">SCHOOL ENTEBBE</span>
+            </div>
+          </a>
+
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li class="dropdown">
+              <a href="index.html#about" class="nav-link">About Us <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#about">Our Story</a></li>
+                <li><a href="index.html#principal">Principal's Message</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="index.html#programs" class="nav-link">Academics <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="index.html#nursery">Nursery School</a></li>
+                <li><a href="index.html#facilities">Facilities</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#admissions" class="nav-link">Admissions</a></li>
+            <li><a href="Gallery.html" class="nav-link active">Gallery</a></li>
+            <li class="dropdown">
+              <a href="index.html#news" class="nav-link">News & Events <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#news">Latest News</a></li>
+                <li><a href="index.html#events">Events Calendar</a></li>
+              </ul>
+            </li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="index.html#admissions" class="btn btn-primary btn-sm nav-cta">Apply Now</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========== MOBILE NAV ========== -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <img src="assets/logo.png" alt="Logo" width="40">
+      <span>GLOBAL JUNIOR SCHOOL</span>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-link">Home</a></li>
+      <li><a href="index.html#about" class="mobile-link">About Us</a></li>
+      <li><a href="index.html#principal" class="mobile-link">Principal's Message</a></li>
+      <li><a href="index.html#programs" class="mobile-link">Academics</a></li>
+      <li><a href="index.html#nursery" class="mobile-link">Nursery School</a></li>
+      <li><a href="index.html#admissions" class="mobile-link">Admissions</a></li>
+      <li><a href="Gallery.html" class="mobile-link active">Gallery</a></li>
+      <li><a href="index.html#news" class="mobile-link">News & Events</a></li>
+      <li><a href="index.html#events" class="mobile-link">Events Calendar</a></li>
+      <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="index.html#admissions" class="btn btn-primary btn-block">Apply Now</a>
+    </div>
+  </div>
+
+  <!-- ========== GALLERY PAGE INTRO ========== -->
+  <div class="gallery-page-intro">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span>Gallery</span>
+    </div>
+    <h1>Our School Memories</h1>
+    <p>A visual journey through the moments that make Global Junior School special — from classroom learning to sports victories, cultural celebrations to graduation milestones.</p>
+  </div>
+
+  <!-- ========== MAIN GALLERY ========== -->
+  <main>
+    <section id="gallery" class="section gallery gallery-full-page" style="padding-top: 60px;">
+      <div class="container">
+
+        <div class="section-header" data-animate>
+          <span class="section-tag"><i class="fas fa-camera"></i> Gallery</span>
+          <h2 class="section-title">School Life in Pictures</h2>
+          <p class="section-subtitle">Browse by category or scroll through all our memories below.</p>
+        </div>
+
+        <!-- Filter Buttons — script.js will rebuild these from Firebase categories -->
+        <div class="gallery-filters" data-animate>
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="academics">Academics</button>
+          <button class="filter-btn" data-filter="sports">Sports</button>
+          <button class="filter-btn" data-filter="events">Events</button>
+          <button class="filter-btn" data-filter="graduation">Graduation</button>
+          <button class="filter-btn" data-filter="trips">Trips</button>
+        </div>
+
+        <!-- Gallery Grid — script.js will populate from Firebase if data exists -->
+        <!-- Static items below are FALLBACK — shown only if Firebase is empty -->
+        <div class="gallery-masonry" id="galleryMasonry">
+
+          <div class="gallery-item" data-category="academics" data-animate="fade-up">
+            <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Students engaged in classroom learning" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Academics</span>
+              <h4>Interactive Learning</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item tall" data-category="sports" data-animate="fade-up" data-delay="100">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Students playing football on the school field" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Sports</span>
+              <h4>Sports Day</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="academics" data-animate="fade-up" data-delay="200">
+            <img src="https://images.unsplash.com/photo-1580582932707-520aed4e9987?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Students conducting science experiments" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1580582932707-520aed4e9987?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Academics</span>
+              <h4>Science Lab</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events" data-animate="fade-up" data-delay="300">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="School cultural event performance" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Events</span>
+              <h4>Cultural Day</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item tall" data-category="graduation" data-animate="fade-up" data-delay="400">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Graduation ceremony" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Graduation</span>
+              <h4>Graduation 2024</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="trips" data-animate="fade-up" data-delay="500">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Students on an educational trip" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Trips</span>
+              <h4>Educational Tour</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="sports" data-animate="fade-up" data-delay="100">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Swimming competition" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Sports</span>
+              <h4>Swimming Gala</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events" data-animate="fade-up" data-delay="200">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="School music concert" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Events</span>
+              <h4>Music Concert</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="academics" data-animate="fade-up" data-delay="300">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Library and reading sessions" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Academics</span>
+              <h4>Library Sessions</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item tall" data-category="trips" data-animate="fade-up" data-delay="400">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Nature walk during school trip" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Trips</span>
+              <h4>Nature Walk</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="graduation" data-animate="fade-up" data-delay="500">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Graduates celebrating" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Graduation</span>
+              <h4>Celebrating Success</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="sports" data-animate="fade-up" data-delay="100">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Athletics competition" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Sports</span>
+              <h4>Athletics Day</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events" data-animate="fade-up" data-delay="200">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Inter-school debate" loading="lazy"
+                 data-full="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=90">
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-category">Events</span>
+              <h4>Debate Competition</h4>
+              <button class="gallery-zoom" aria-label="Zoom image"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hidden - no "View More" on gallery page -->
+        <div class="gallery-footer"></div>
+      </div>
+    </section>
+
+    <!-- Gallery Stats -->
+    <div class="gallery-stats">
+      <div class="container">
+        <div class="gallery-stats-grid">
+          <div class="gallery-stat">
+            <div class="gallery-stat-number" id="galleryCountStat">12</div>
+            <div class="gallery-stat-label">Photos</div>
+          </div>
+          <div class="gallery-stat">
+            <div class="gallery-stat-number">5</div>
+            <div class="gallery-stat-label">Categories</div>
+          </div>
+          <div class="gallery-stat">
+            <div class="gallery-stat-number">2024–25</div>
+            <div class="gallery-stat-label">Academic Year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Home -->
+    <div class="back-to-home">
+      <a href="index.html" class="btn btn-outline">
+        <i class="fas fa-arrow-left"></i> Back to Homepage
+      </a>
+    </div>
+  </main>
+
+  <!-- ========== LIGHTBOX (same as index.html) ========== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-image" id="lightboxImage">
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- ========== FOOTER (same as index.html) ========== -->
+  <footer class="footer" id="footer">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col footer-about">
+            <a href="index.html" class="footer-logo">
+              <img src="assets/logo.png" alt="Global Junior School Logo" width="48" height="48">
+              <div>
+                <span class="footer-logo-name">GLOBAL JUNIOR</span>
+                <span class="footer-logo-sub">SCHOOL ENTEBBE</span>
+              </div>
+            </a>
+            <p>A leading co-educational institution committed to academic excellence, character development, and holistic growth since 2005.</p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="index.html#nursery"><i class="fas fa-chevron-right"></i> Nursery School</a></li>
+              <li><a href="index.html#programs"><i class="fas fa-chevron-right"></i> Academics</a></li>
+              <li><a href="index.html#admissions"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+              <li><a href="Gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+              <li><a href="index.html#news"><i class="fas fa-chevron-right"></i> News & Events</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Academics</h4>
+            <ul class="footer-links">
+              <li><a href="index.html#nursery"><i class="fas fa-chevron-right"></i> Nursery School</a></li>
+              <li><a href="index.html#programs"><i class="fas fa-chevron-right"></i> Primary School</a></li>
+              <li><a href="index.html#programs"><i class="fas fa-chevron-right"></i> Secondary School</a></li>
+              <li><a href="index.html#programs"><i class="fas fa-chevron-right"></i> Cambridge Curriculum</a></li>
+              <li><a href="index.html#programs"><i class="fas fa-chevron-right"></i> Co-curricular</a></li>
+              <li><a href="#" class="footer-portal-link"><i class="fas fa-user-graduate"></i> Student Portal</a></li>
+              <li><a href="#" class="footer-portal-link"><i class="fas fa-users"></i> Parent Portal</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact Info</h4>
+            <ul class="footer-contact">
+              <li><i class="fas fa-map-marker-alt"></i><span>Kampala Road, Entebbe,<br>Wakiso District, Uganda</span></li>
+              <li><i class="fas fa-phone-alt"></i><span><a href="tel:+256705612677">256705612677</a><br><a href="tel:+256705612677">256705612677</a></span></li>
+              <li><i class="fas fa-envelope"></i><span><a href="mailto:globaljuniorschool.com">globaljuniorschool.com</a></span></li>
+            </ul>
+            <div class="footer-newsletter">
+              <h4>Newsletter</h4>
+              <p>Subscribe to receive updates and news.</p>
+              <form class="newsletter-form" id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                <button type="submit" aria-label="Subscribe to newsletter"><i class="fas fa-paper-plane"></i></button>
+              </form>
+              <div id="newsletter-message" class="newsletter-message" style="display:none;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <p>&copy; <span id="currentYear"></span> Global Junior School Entebbe. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Sitemap</a>
+            <a href="#">Accessibility</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Set current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Update gallery count stat after Firebase loads
+    const updateGalleryCount = () => {
+      const count = document.querySelectorAll('#galleryMasonry .gallery-item:not(.hidden)').length;
+      const stat = document.getElementById('galleryCountStat');
+      if (stat) stat.textContent = count;
+    };
+
+    // Run after a delay to allow Firebase to populate
+    setTimeout(updateGalleryCount, 2000);
+
+    // Also update when filters are clicked
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('filter-btn')) {
+        setTimeout(updateGalleryCount, 100);
+      }
+    });
+  </script>
+
+  <!-- Main script.js — handles Firebase, lightbox, filters, animations, etc. -->
+  <script type="module" src="config.js"></script>
+  <script type="module" src="script.js"></script>
+<script type="module" src="analysis.js"></script>
+</body>
+</html>
